@@ -11,7 +11,7 @@ namespace ParallelPracticeConsoleApp
             await Task.WhenAll(tasks);
         }
 
-        private static async Task<int> GetWhiteSpacesFromFile(string path)
+        public static async Task<int> GetWhiteSpacesFromFile(string path)
         {
             if (File.Exists(path))
             {
@@ -20,10 +20,8 @@ namespace ParallelPracticeConsoleApp
                 var lines = await File.ReadAllLinesAsync(path);
                 var sum = lines.SelectMany(line => line.ToCharArray()).Where(x => char.IsWhiteSpace(x)).Count();
                 stopWatch.Stop();
-                Console.WriteLine($"для файла {path} количество пробелов - {sum}");
                 var ts = stopWatch.Elapsed;
-                string elapsedTime = String.Format("{0:00}:{1:00}", ts.Seconds, ts.Milliseconds / 10);
-                Console.WriteLine($"Время выполнения: {elapsedTime}");
+                Console.WriteLine($"Время выполнения: {ts.Milliseconds} мс, количество пробелов - {sum}, путь к файлу {path}");
                 return sum;
             }
             else
