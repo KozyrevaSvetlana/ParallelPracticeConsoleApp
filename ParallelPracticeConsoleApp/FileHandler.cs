@@ -26,7 +26,7 @@ namespace ParallelPracticeConsoleApp
             }
             else
             {
-                throw new NullReferenceException($"По пути {path} файл не найден");
+                throw new FileNotFoundException($"По пути {path} файл не найден");
             }
         }
     }
